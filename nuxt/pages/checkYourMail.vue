@@ -1,4 +1,5 @@
 <template>
+    <NuxtLayout name="">
   <div class="h-full grid">
     <div class="flex flex-col items-center justify-center">
       <Heading text="Nearly there!" />
