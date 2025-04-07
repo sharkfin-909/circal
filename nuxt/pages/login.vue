@@ -7,7 +7,7 @@
       class="w-full h-full grid grid-rows-4 pb-10"
     >
       <div class="pt-3 flex items-center">
-        <Heading class="" text="Log in"></Heading>
+        <Heading2 class="" text="Log in"></Heading2>
       </div>
       <UFormField label="Email" name="email" class="w-full">
         <UInput

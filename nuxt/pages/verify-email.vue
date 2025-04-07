@@ -1,35 +1,44 @@
 <template>
-  <div class="w-full h-full grid">
-    <div class="flex items-center">
-      <Heading text="Email Verification">?</Heading>
-    </div>
-    <div class="h-full flex flex-col items-center justify-around">
-      <p v-if="status === 'verifying'">Verifying your email...</p>
-      <div v-if="status === 'success'" class="">
-        <h2>Welcome to Circal Studio!</h2>
-        <div class="w-full flex items-center">
-          <UButton type="submit" block>make your first circal</UButton>
-        </div>
+  <NuxtLayout name="centered">
+    <div class="grid grid-rows-3 h-full">
+      <div class="row-span-1 flex items-center">
+        <Heading2  text="Email Verification" />
       </div>
+      <div class="row-span-2 w-full flex flex-col items-center justify-center gap-30">
+        <p v-if="status === 'verifying'">Verifying your email...</p>
 
-      <p v-if="status === 'error'">
-        Oops! Verification failed: Your email link has expired...
-      </p>
+        <Heading3
+          v-if="status === 'success'"
+          text="Welcome to Circal Studio!"
+        />
 
-      <Button v-if="status === 'error'" text="send new link" />
+        <div v-if="status === 'success'" class="w-full flex justify-center">
+          <Button
+            type="submit"
+            to="/studio"
+            text="make your first circal"
+          ></Button>
+        </div>
+
+        <p v-if="status === 'error'">
+          Oops! Verification failed: Email link not valid...
+        </p>
+
+        <Button v-if="status === 'error'" text="send new link" />
+      </div>
     </div>
-  </div>
+  </NuxtLayout>
 </template>
 
 <script setup>
-x
   const route = useRoute();
   const status = ref("verifying");
   const error = ref(null);
-
+  const config = useRuntimeConfig();
   onMounted(async () => {
     const token = route.query.token;
-
+    console.log(token);
+    const config = useRuntimeConfig();
     if (!token) {
       status.value = "error";
       error.value = "Missing verification token.";
@@ -37,24 +46,23 @@ x
     }
 
     try {
-      const res = await $fetch(
-        "http://localhost:8055/users/register/verify-email",
+      const resp = await $fetch(
+        config.public.directus.url + "/users/register/verify-email",
         {
           method: "GET",
+          headers: {
+            Authorization: `Bearer ${config.public.directus.token}`,
+          },
           params: {
             token: token,
           },
         }
       );
-
-      if (res && res.data) {
-        status.value = "success";
-      } else {
-        throw new Error("Invalid response from Directus.");
-      }
+      console.log(">", resp);
     } catch (err) {
       status.value = "error";
       error.value = err.message;
     }
+    status.value = "success";
   });
 </script>

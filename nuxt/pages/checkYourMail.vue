@@ -2,7 +2,7 @@
   <NuxtLayout name="centered">
     <div class="h-full grid">
       <div class="flex flex-col items-center justify-center">
-        <Heading text="Nearly there!" />
+        <Heading2 text="Nearly there!" />
       </div>
       <div class="flex flex-col justify-around items-center">
         <p class="text-center">

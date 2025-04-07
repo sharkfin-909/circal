@@ -48,8 +48,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       directus: {
-        url: "http://localhost:8055",
-        token: "uLD8U2-lBi2QSwZ7B1hTszBjAXBI_FHE",
+        url: process.env.DIRECTUS_URL,
+        token: process.env.DIRECTUS_TOKEN,
       },
     },
     directus: {
