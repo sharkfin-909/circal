@@ -1,0 +1,30 @@
+<template>
+  <ClientOnly v-if="!colorMode?.forced">
+    <UButton
+      :icon="
+        isDark
+          ? 'line-md:sunny-outline'
+          : 'material-symbols-light:dark-mode-outline-rounded'
+      "
+      color="neutral"
+      variant="ghost"
+      @click="isDark = !isDark"
+    />
+
+    <template #fallback>
+      <div class="size-8" />
+    </template>
+  </ClientOnly>
+</template>
+<script setup>
+  const colorMode = useColorMode();
+
+  const isDark = computed({
+    get() {
+      return colorMode.value === "dark";
+    },
+    set() {
+      colorMode.preference = colorMode.value === "dark" ? "light" : "dark";
+    },
+  });
+</script>

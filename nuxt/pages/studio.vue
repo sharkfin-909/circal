@@ -3,7 +3,9 @@
     <!-- header -->
     <div class="h-16 flex justify-between items-center px-2">
       <!-- logo -->
-      <h2>circal</h2>
+       <NuxtLink to="/">
+      <h2  class="cursor-pointer">circal</h2>
+      </NuxtLink>
       <DesignSelect :style="uiStore.hideOnPresent" />
       <!-- design title -->
       <!-- <h3 :style="uiStore.hideOnPresent" >{{ store.design.title }}</h3> -->
@@ -28,22 +30,7 @@
           </div>
         </div>
 
-        <ClientOnly v-if="!colorMode?.forced">
-          <UButton
-            :icon="
-              isDark
-                ? 'line-md:sunny-outline'
-                : 'material-symbols-light:dark-mode-outline-rounded'
-            "
-            color="neutral"
-            variant="ghost"
-            @click="isDark = !isDark"
-          />
-
-          <template #fallback>
-            <div class="size-8" />
-          </template>
-        </ClientOnly>
+        <DarkToggle />
       </div>
     </div>
 
@@ -60,20 +47,7 @@
 </template>
 
 <script setup lang="ts">
-  import ElementSwitches from "~/components/ElementControls.vue";
   import { useCircalStore } from "~/stores/circal";
-  const store = useCircalStore();
-
-  const colorMode = useColorMode();
-
-  const isDark = computed({
-    get() {
-      return colorMode.value === "dark";
-    },
-    set() {
-      colorMode.preference = colorMode.value === "dark" ? "light" : "dark";
-    },
-  });
 
   import { useUiStore } from "~/stores/ui";
   const uiStore = useUiStore();

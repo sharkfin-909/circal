@@ -73,7 +73,7 @@
   /* Default border color */
   --ui-border: var(--ui-color-neutral-400);
   /* Subtle border */
-  --ui-border-muted: var(--ui-color-neutral-200);
+  --ui-border-muted: var(--ui-color-neutral-300)
   /* More prominent border */
   --ui-border-accented: var(--ui-color-neutral-400);
   /* Inverted border color */

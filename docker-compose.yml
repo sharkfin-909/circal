@@ -1,0 +1,42 @@
+services:
+  db:
+    container_name: directus_database
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: directus
+      POSTGRES_PASSWOR: your_password
+      POSTGRES_DB: directus
+    volumes:
+      - directus_db_data:/var/lib/postgresql/data
+    networks:
+      - directus_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U directus"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  directus:
+    container_name: directus_app
+    image: directus/directus:latest
+    ports:
+      - "8055:8055"
+    env_file:
+      - ./.env
+    networks:
+      - directus_network
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+    restart: unless-stopped
+    volumes:
+      - ./directus/extensions:/extensions
+      - ./directus/templates:/templates
+
+networks:
+  directus_network:
+    driver: bridge
+volumes:
+  directus_db_data:

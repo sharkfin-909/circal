@@ -27,7 +27,18 @@ export default defineNuxtConfig({
     "@nuxt/ui",
     "nuxt-directus",
   ],
-
+  vite: {
+    server: {
+      hmr: {
+        clientPort: 443,
+      },
+      watch: {
+        usePolling: true,
+      },
+      strictPort: false,
+      allowedHosts: [".ngrok-free.app"], // <-- wildcard domain or exact match
+    },
+  },
   typescript: {
     typeCheck: false,
     strict: false,
@@ -38,14 +49,12 @@ export default defineNuxtConfig({
     public: {
       directus: {
         url: "http://localhost:8055",
-        token: "DmoGuqXpiPR6XBb33d7cFjCJpguz0OYU",
-
+        token: "uLD8U2-lBi2QSwZ7B1hTszBjAXBI_FHE",
       },
     },
     directus: {
-      token: "DmoGuqXpiPR6XBb33d7cFjCJpguz0OYU",
+      token: "uLD8U2-lBi2QSwZ7B1hTszBjAXBI_FHE",
       devtools: "true",
     },
   },
-  
 });
