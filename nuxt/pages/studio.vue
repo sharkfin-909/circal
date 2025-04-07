@@ -1,7 +1,7 @@
 <template>
   <div class="h-screen flex flex-col">
     <!-- header -->
-    <div class="h-16 flex justify-between items-center px-2">
+    <div class="h-16 flex justify-between items-center ">
       <!-- logo -->
        <NuxtLink to="/">
       <h2  class="cursor-pointer">circal</h2>

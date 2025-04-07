@@ -4,9 +4,11 @@
       :state="form"
       :schema="schema"
       @submit.prevent="handleSubmit"
-      class="w-full h-full grid grid-rows-5"
+      class="w-full h-full grid grid-rows-4 pb-10"
     >
-      <Heading text="Log in"></Heading>
+      <div class="pt-3 flex items-center">
+        <Heading class="" text="Log in"></Heading>
+      </div>
       <UFormField label="Email" name="email" class="w-full">
         <UInput
           class="w-full"
@@ -40,8 +42,6 @@
           </template>
         </UInput>
       </UFormField>
-
-      <div></div>
 
       <div class="w-full flex items-center justify-center">
         <Button v-if="errorMessage === null" type="submit" text="Submit"
